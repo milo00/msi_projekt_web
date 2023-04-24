@@ -19,7 +19,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import DeleteIcon from '@mui/icons-material/Delete';
 // import { UserOptionsDialog } from '../../navbarDialogs/UserOptionsDialog';
 // import { TripGroupOptionsDialog } from '../../navbarDialogs/TripGroupOptionsDialog';
-// import { ConfirmLogoutDialog } from '../../navbarDialogs/ConfirmLogoutDialog';
+import { ConfirmLogoutDialog } from '../../navbarDialogs/ConfirmLogoutDialog';
 // import { ConfirmLeaveGroupDialog } from '../../navbarDialogs/ConfirmLeaveGroupDialog';
 // import { ConfirmDeleteGroupDialog } from '../../navbarDialogs/DeleteGroupDialog';
 import { doGet } from '../../utils/fetch-utils';
@@ -150,11 +150,13 @@ export const NavigationNavbar = ({ buttonsData, groupId }) => {
                 onClose={() => setLeaveGroupDialogOpen(false)}
                 groupId={groupId}
             />
+            */}
             <ConfirmLogoutDialog
                 open={userLogoutDialogOpen}
                 onClose={() => setUserLogoutDialogOpen(false)}
                 logoutAction={logoutAction}
             />
+            {/*
             <TripGroupOptionsDialog
                 open={tripGroupOptionsDialogOpen}
                 onClose={() => setTripGroupOptionsDialogOpen(false)}

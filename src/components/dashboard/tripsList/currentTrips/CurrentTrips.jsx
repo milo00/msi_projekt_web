@@ -53,14 +53,14 @@ export const CurrentTrips = ({ trips }) => {
 
                         />
                     </Grid>
-                    <Grid item xs={12} md={6}>
+                    {/* <Grid item xs={12} md={6}>
                         <DashboardOptionCard
                             icon={<FactCheckIcon sx={{ color: "primary.dark", fontSize: "46px" }} />}
                             title="Trip summary"
                             description="Check general info about the trip"
                             route={`/tripSummary/${groupId}`}
                         />
-                    </Grid>
+                    </Grid> */}
                 </Grid>
             </Grid>
         </Grid>

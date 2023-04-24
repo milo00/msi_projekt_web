@@ -136,8 +136,8 @@ export const DashboardPage = () => {
             >
                 <CurrentTrips trips={testTrips} isLoading={isLoading} />
 
-                <Divider variant="middle" />
-                <FutureTrips trips={testTrips} />
+                {/* <Divider variant="middle" /> */}
+                {/* <FutureTrips trips={testTrips} /> */}
 
                 <Divider variant="middle" />
                 <PastTrips trips={testTrips} isLoading={isLoading} />

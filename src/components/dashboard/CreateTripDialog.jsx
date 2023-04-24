@@ -82,7 +82,7 @@ export const CreateTripDialog = ({ open, onClose, createTrip, onSuccess }) => {
 
     const defaultInputValues = {
         tripName: "",
-        startingLocation: "",
+        destination: "",
         currency: "",
         minDays: 0,
         minParticipants: 0,
@@ -94,10 +94,10 @@ export const CreateTripDialog = ({ open, onClose, createTrip, onSuccess }) => {
             .string()
             .required("You have to provide trip name")
             .max(50, "Too long name, max. 50 characters"),
-        startingLocation: Yup
+        destination: Yup
             .string()
-            .required("You have to provide starting location")
-            .max(100, "Too long starting location, max. 100 characters"),
+            .required("You have to provide destination")
+            .max(100, "Too long destination, max. 100 characters"),
         currency: Yup
             .string()
             .required("You have to provide currency for trip group"),
@@ -223,9 +223,9 @@ export const CreateTripDialog = ({ open, onClose, createTrip, onSuccess }) => {
                         <TextField
                             type='string'
                             margin="normal"
-                            placeholder='Starting location'
-                            name='startingLocation'
-                            label='Starting location'
+                            placeholder='Destination'
+                            name='destination'
+                            label='Destination'
                             fullWidth
                             variant="outlined"
                             InputProps={{
@@ -235,17 +235,17 @@ export const CreateTripDialog = ({ open, onClose, createTrip, onSuccess }) => {
                                     </InputAdornment>
                                 ),
                             }}
-                            {...register('startingLocation')}
-                            error={!!errors.startingLocation}
-                            helperText={errors.startingLocation?.message}
+                            {...register('destination')}
+                            error={!!errors.destination}
+                            helperText={errors.destination?.message}
                         />
-                        <Box sx={{ display: "flex", justifyContent: "space-between", alignContent: "center" }} >
+                        <Box sx={{ display: "flex" }} >
                             <Controller
                                 name='currency'
                                 control={control}
                                 render={({ field: { onChange, value } }) => (
                                     <TextField
-                                        sx={{ minWidth: "150px", width: "150px" }}
+                                        sx={{ minWidth: "150px", width: "150px", mr: 5 }}
                                         fullWidth
                                         select
                                         margin='normal'
@@ -289,7 +289,7 @@ export const CreateTripDialog = ({ open, onClose, createTrip, onSuccess }) => {
                                 error={!!errors.minDays}
                                 helperText={errors.minDays?.message}
                             />
-                            <TextField
+                            {/* <TextField
                                 sx={{ minWidth: "150px", width: "150px" }}
                                 type="number"
                                 margin="normal"
@@ -307,7 +307,7 @@ export const CreateTripDialog = ({ open, onClose, createTrip, onSuccess }) => {
                                 {...register('minParticipants')}
                                 error={!!errors.minParticipants}
                                 helperText={errors.minParticipants?.message}
-                            />
+                            /> */}
                         </Box>
                         <TextField
                             type='string'
