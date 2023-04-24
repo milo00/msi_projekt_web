@@ -11,7 +11,7 @@ import { DashboardPage, URL as DashboardURL } from '../../pages/dashboard-page/D
 // import { OptimizedDatesPage, URL as OptimizedDatesPageURL } from '../../pages/availability-pages/OptimizedDatesPage';
 // import { DayPlanPage, URL as DayPlanURL } from '../../pages/dayPlan-page/DayPlanPage';
 // import { FinancesPage, URL as FinancesURL } from '../../pages/finances-page/FinancesPage';
-// import { ParticipantsPage, URL as ParticipantsURL } from '../../pages/participants-page/ParticipantsPage';
+import { ParticipantsPage, URL as ParticipantsURL } from '../../pages/participants-page/ParticipantsPage';
 // import { TripSummaryPage, URL as TripSummaryURL } from '../../pages/tripSummary-page/TripSummaryPage';
 // import { InvitePage, URL as InviteURL } from '../../pages/invite-page/InvitePage';
 
@@ -28,6 +28,7 @@ export const PublicContentRouting = () => {
                 <Route exact path="*" element={<ErrorPage />} />
                 {/* Routing to be moved to protected */}
                 <Route exact path={DashboardURL} element={<DashboardPage />} />
+                <Route exact path={ParticipantsURL} element={<ParticipantsPage />} />
                 {/* <Route exact path={AccommodationURL} element={<AccommodationsPage />} />
                 <Route exact path={MyAccommodationsURL} element={<MyAccommodationsPage />} />
                 <Route exact path={MyAccommodationVotesURL} element={<MyAccommodationVotesPage />} />
@@ -35,7 +36,6 @@ export const PublicContentRouting = () => {
                 <Route exact path={OptimizedDatesPageURL} element={<OptimizedDatesPage />} />
                 <Route exact path={DayPlanURL} element={<DayPlanPage />} />
                 <Route exact path={FinancesURL} element={<FinancesPage />} />
-                <Route exact path={ParticipantsURL} element={<ParticipantsPage />} />
                 <Route exact path={TripSummaryURL} element={<TripSummaryPage />} />
                 <Route exact path={InviteURL} element={<InvitePage />} /> */}
             </Routes>
