@@ -104,11 +104,11 @@ export const CreateTripDialog = ({ open, onClose, createTrip, onSuccess }) => {
         minDays: Yup
             .number()
             .min(1, "Number of days must be equal or higher than 1")
-            .required("You have to provide min number of days"),
-        minParticipants: Yup
-            .number()
-            .min(1, "Number of participants must be equal or higher than 1")
-            .required("You have to provide min number of participants"),
+            .required("You have to provide duration of the trip"),
+        // minParticipants: Yup
+        //     .number()
+        //     .min(1, "Number of participants must be equal or higher than 1")
+        //     .required("You have to provide min number of participants"),
         description: Yup
             .string()
             .max(DESCRIPTION_LIMIT, "You have exceeded characters limit for description")
@@ -134,10 +134,11 @@ export const CreateTripDialog = ({ open, onClose, createTrip, onSuccess }) => {
             'currency': values.currency,
             'description': values.description,
             'votesLimit': 0,
+            //zamiana na destination?
             'startLocation': values.startingLocation,
             'startCity': values.startingLocation,
             'minimalNumberOfDays': values.minDays,
-            'minimalNumberOfParticipants': values.minParticipants
+            // 'minimalNumberOfParticipants': values.minParticipants
         };
         await doPost('/api/v1/trip-group/group', postBody)
             .then(response => {
@@ -274,9 +275,9 @@ export const CreateTripDialog = ({ open, onClose, createTrip, onSuccess }) => {
                                 sx={{ minWidth: "150px", width: "150px" }}
                                 type="number"
                                 margin="normal"
-                                placeholder='Min days'
+                                placeholder='Number of days'
                                 name='minDays'
-                                label='Min days'
+                                label='Number of days'
                                 variant="outlined"
                                 InputProps={{
                                     startAdornment: (

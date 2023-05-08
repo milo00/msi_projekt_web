@@ -18,10 +18,10 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import DeleteIcon from '@mui/icons-material/Delete';
 // import { UserOptionsDialog } from '../../navbarDialogs/UserOptionsDialog';
-// import { TripGroupOptionsDialog } from '../../navbarDialogs/TripGroupOptionsDialog';
+import { TripGroupOptionsDialog } from '../../navbarDialogs/TripGroupOptionsDialog';
 import { ConfirmLogoutDialog } from '../../navbarDialogs/ConfirmLogoutDialog';
 // import { ConfirmLeaveGroupDialog } from '../../navbarDialogs/ConfirmLeaveGroupDialog';
-// import { ConfirmDeleteGroupDialog } from '../../navbarDialogs/DeleteGroupDialog';
+import { ConfirmDeleteGroupDialog } from '../../navbarDialogs/DeleteGroupDialog';
 import { doGet } from '../../utils/fetch-utils';
 import './NavigationNavbar.css';
 
@@ -42,7 +42,9 @@ export const NavigationNavbar = ({ buttonsData, groupId }) => {
 
     useEffect(() => {
         if (groupId) {
-            getIsCoordinator();
+            //zakomentowane getIsCoordinator, żeby sprawdzić opcje dla koordynatora - zawsze user koordynatorem
+            // getIsCoordinator();
+            setIsCoordinator(true);
             getTripData();
         }
         getUserData();
@@ -140,11 +142,12 @@ export const NavigationNavbar = ({ buttonsData, groupId }) => {
 
     return (
         <>
-            {/* <ConfirmDeleteGroupDialog
+            <ConfirmDeleteGroupDialog
                 open={deleteGroupDialogOpen}
                 onClose={() => setDeleteGroupDialogOpen(false)}
                 groupId={groupId}
             />
+            {/*
             <ConfirmLeaveGroupDialog
                 open={leaveGroupDialogOpen}
                 onClose={() => setLeaveGroupDialogOpen(false)}
@@ -156,12 +159,12 @@ export const NavigationNavbar = ({ buttonsData, groupId }) => {
                 onClose={() => setUserLogoutDialogOpen(false)}
                 logoutAction={logoutAction}
             />
-            {/*
             <TripGroupOptionsDialog
                 open={tripGroupOptionsDialogOpen}
                 onClose={() => setTripGroupOptionsDialogOpen(false)}
                 groupId={groupId}
             />
+            {/*
             {userOptionsDialogOpen && <UserOptionsDialog
                 open
                 onClose={() => setUserOptionsDialogOpen(false)}

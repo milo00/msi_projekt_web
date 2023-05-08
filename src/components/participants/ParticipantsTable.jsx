@@ -27,7 +27,7 @@ const participants = [
         surname: "Bialik",
         phoneNumber: "123456789",
         email: "254573@student.pwr.edu.pl",
-        role: "PARTICIPANT"
+        role: "COORDINATOR"
     },
     {
         userId: 2,
@@ -297,14 +297,17 @@ export const ParticipantsTable = ({ groupStage, isCoordinator, groupId }) => {
             let surname = usersData[i].surname;
             let phoneNumber = usersData[i].phoneNumber;
             let email = usersData[i].email;
-            let role;
+            let role = usersData[i].role;
 
-            if (groupCoordinators.some(coordinator => coordinator.userId === usersData[i].userId)) {
-                role = "COORDINATOR"
-            }
-            else {
-                role = "PARTICIPANT";
-            }
+
+            // let role;
+            // zakomentowane na etap api
+            // if (groupCoordinators.some(coordinator => coordinator.userId === usersData[i].userId)) {
+            //     role = "COORDINATOR"
+            // }
+            // else {
+            //     role = "PARTICIPANT";
+            // }
             user['userId'] = userId;
             user['firstName'] = firstName;
             user['surname'] = surname;
