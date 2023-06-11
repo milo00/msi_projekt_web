@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Card } from '@mui/material';
 import { Typography } from '@mui/material';
-import { Button } from '@mui/material';
+// import { Button } from '@mui/material';
 import './DashboardFlipCard.css';
 
 
@@ -48,7 +48,7 @@ export const DashboardFlipCard = ({ title, description, action }) => {
                         >
                             {description}
                         </Typography>
-                        {action && (
+                        {/* {action && (
                             <Box width="50%" mt={4} mb={2} mx="auto">
                                 <Button
                                     href={action.route}
@@ -65,7 +65,7 @@ export const DashboardFlipCard = ({ title, description, action }) => {
                                     {action.label}
                                 </Button>
                             </Box>
-                        )}
+                        )} */}
                     </Box>
                 </Box>
             </Box>
