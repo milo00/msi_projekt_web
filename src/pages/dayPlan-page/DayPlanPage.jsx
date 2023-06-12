@@ -39,29 +39,29 @@ import { SuccessToast } from "../../components/toasts/SuccessToast";
 export const URL = '/dayPlan/:groupId';
 export const NAME = "DayPlan";
 
-const testDayPlans = [
-    {
-        dayPlanId: 0,
-        name: "Zwiedzanie",
-        date: new Date(2023, 4, 21).toLocaleDateString(),
-        iconType: 1,
-        dayAttractions: []
-    },
-    {
-        dayPlanId: 1,
-        name: "Odpoczynek",
-        date: new Date(2023, 4, 22).toLocaleDateString(),
-        iconType: 6,
-        dayAttractions: []
-    },
-    {
-        dayPlanId: 2,
-        name: "Lokalna kuchnia",
-        date: new Date(2023, 4, 23).toLocaleDateString(),
-        iconType: 4,
-        dayAttractions: []
-    }
-]
+// const testDayPlans = [
+//     {
+//         dayPlanId: 0,
+//         name: "Zwiedzanie",
+//         date: new Date(2023, 4, 21).toLocaleDateString(),
+//         iconType: 1,
+//         dayAttractions: []
+//     },
+//     {
+//         dayPlanId: 1,
+//         name: "Odpoczynek",
+//         date: new Date(2023, 4, 22).toLocaleDateString(),
+//         iconType: 6,
+//         dayAttractions: []
+//     },
+//     {
+//         dayPlanId: 2,
+//         name: "Lokalna kuchnia",
+//         date: new Date(2023, 4, 23).toLocaleDateString(),
+//         iconType: 4,
+//         dayAttractions: []
+//     }
+// ]
 
 export const DayPlanPage = (props) => {
 
@@ -83,22 +83,22 @@ export const DayPlanPage = (props) => {
     const [tripGroup, setTripGroup] = useState([])
     const [isCoordinator, setIsCoordinator] = useState(false);
 
-    var isCordinator = true;
+    // var isCordinator = true;
 
     useEffect(() => {
-        setAllDayPlans(testDayPlans.map(dayPlan => (
-            <ListItem sx={{ p: 0, my: 1 }} key={dayPlan.dayPlanId}>
-                <DayPlanCard
-                    dayPlanData={dayPlan}
-                    groupId={groupId}
-                    showDetailedPlan={showDetailedPlan}
-                    onSuccess={() => getData()}
-                    onSuccessDelete={() => getDataAfterDeleteDayPlan()} />
-            </ListItem>
-        )));
-        // getIsCoordinator();
-        // getData();
-        // getTripData();
+        // setAllDayPlans(testDayPlans.map(dayPlan => (
+        //     <ListItem sx={{ p: 0, my: 1 }} key={dayPlan.dayPlanId}>
+        //         <DayPlanCard
+        //             dayPlanData={dayPlan}
+        //             groupId={groupId}
+        //             showDetailedPlan={showDetailedPlan}
+        //             onSuccess={() => getData()}
+        //             onSuccessDelete={() => getDataAfterDeleteDayPlan()} />
+        //     </ListItem>
+        // )));
+        getIsCoordinator();
+        getData();
+        getTripData();
     }, [])
 
     // const isCorinator = async () => {
@@ -366,8 +366,8 @@ export const DayPlanPage = (props) => {
                                             </Typography>
                                         </Box>
 
-                                        {/* {isCoordinator && */}
-                                        {isCordinator &&
+                                        {isCoordinator &&
+                                            // {isCordinator &&
                                             <Button
                                                 variant="contained"
                                                 sx={{

@@ -12,7 +12,7 @@ import { PLACEHOLDER_IMAGE } from "../images/Images";
 
 export const AttractionCandidateCard = ({ attractionData, openSelectAttractionDialog }) => {
 
-    const [mapsLink, setMapsLink] = useState(attractionData.url)
+    const [mapsLink, setMapsLink] = useState(attractionData.photoLink)
 
     var getPhotoUrl = (photoReference) => {
         return 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + photoReference + '&key=' + process.env.REACT_APP_GOOGLE_MAPS_API_KEY;

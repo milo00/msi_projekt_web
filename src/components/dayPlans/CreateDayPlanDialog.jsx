@@ -11,6 +11,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { Box } from '@mui/material';
@@ -103,7 +104,7 @@ export const CreateDayPlanDialog = ({ open, onClose, onSuccess, groupId, startDa
     const defaultInputValues = {
         dayPlanName: dayPlanName,
         icon: '0',
-        date: new Date()
+        date: today
     };
 
     const [values, setValues] = useState(defaultInputValues);
@@ -146,7 +147,7 @@ export const CreateDayPlanDialog = ({ open, onClose, onSuccess, groupId, startDa
             .typeError("Invalid date.")
     });
 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm({
+    const { register, handleSubmit, reset, formState: { errors }, control } = useForm({
         resolver: yupResolver(validationSchema),
     });
 
@@ -154,9 +155,9 @@ export const CreateDayPlanDialog = ({ open, onClose, onSuccess, groupId, startDa
         setValues(value);
     };
 
-    const handleCreateDayPlan = async (dayPlanName, date, icon) => {
+    const handleCreateDayPlan = async (values) => {
         setIsCreating(true);
-        var postBody = { 'groupId': groupId, 'name': dayPlanName, 'date': date, 'iconType': icon };
+        var postBody = { 'groupId': groupId, 'name': values.dayPlanName, 'date': values.date, 'iconType': values.icon };
         await doPost('/api/v1/day-plan', postBody)
             .then(response => {
                 setSuccessToastOpen(response.ok);
@@ -220,7 +221,7 @@ export const CreateDayPlanDialog = ({ open, onClose, onSuccess, groupId, startDa
                 </DialogTitle>
                 <DialogContent>
                     <form
-                        onSubmit={handleSubmit(() => handleCreateDayPlan(dayPlanName.value, values.date, values.icon))}
+                        onSubmit={handleSubmit(handleCreateDayPlan)}
                     >
                         <TextField
                             type='string'
@@ -248,7 +249,58 @@ export const CreateDayPlanDialog = ({ open, onClose, onSuccess, groupId, startDa
                         />
                         <Box sx={{ display: "flex", flexDirection: "column", minWidth: "200px", width: "200px" }}>
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                <DatePicker
+                                {/* test */}
+                                {/* <DatePicker
+                                    disablePast
+                                    onChange={(newDate) => {
+                                        handleChange({ ...values, date: newDate });
+                                    }}
+                                    value={values.date}
+                                    label="Date"
+                                    minDate={startDate}
+                                    maxDate={endDate}
+                                    sx={{
+                                        svg: { color: "#2ab7ca" },
+                                        my: 2
+                                    }}
+                                    onKeyDown={onKeyDown}
+                                    margin="normal"
+                                    {...register('date')}
+                                    error={Boolean(errors.date) ? (Boolean(dateError)) : false}
+                                    helperText={Boolean(errors.date) && dateError}
+                                /> */}
+                                <Controller
+                                    name={"date"}
+                                    defaultValue={new Date()}
+                                    control={control}
+                                    sx={{ mb: 1 }}
+                                    render={({ field }) =>
+                                        <DatePicker
+                                            disablePast
+                                            label="Date"
+                                            sx={{
+                                                svg: { color: "#2ab7ca" },
+                                                mt: 1,
+                                                mb: 1,
+                                                width: "50%",
+                                                minWidth: "200px"
+                                            }}
+                                            // renderInput={(params) =>
+                                            //     <TextField
+                                            //         {...params}
+                                            //         onKeyDown={onKeyDown}
+                                            //         error={!!errors.date}
+                                            //         helperText={errors.date?.message}
+                                            //     />
+                                            // }
+                                            onKeyDown={onKeyDown}
+                                            error={!!errors.date}
+                                            helperText={errors.date?.message}
+                                            {...field}
+                                        />
+                                    }
+                                />
+                                {/* <DatePicker
                                     disablePast
                                     onChange={(newDate) => {
                                         handleChange({ ...values, date: newDate });
@@ -281,7 +333,7 @@ export const CreateDayPlanDialog = ({ open, onClose, onSuccess, groupId, startDa
                                             }}
                                         />
                                     }
-                                />
+                                /> */}
                             </LocalizationProvider>
                         </Box>
                         <DialogContentText variant="body1" sx={{ mt: 1, mb: -1 }}>

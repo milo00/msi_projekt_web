@@ -17,10 +17,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import DeleteIcon from '@mui/icons-material/Delete';
-// import { UserOptionsDialog } from '../../navbarDialogs/UserOptionsDialog';
+import { UserOptionsDialog } from '../../navbarDialogs/UserOptionsDialog';
 import { TripGroupOptionsDialog } from '../../navbarDialogs/TripGroupOptionsDialog';
 import { ConfirmLogoutDialog } from '../../navbarDialogs/ConfirmLogoutDialog';
-// import { ConfirmLeaveGroupDialog } from '../../navbarDialogs/ConfirmLeaveGroupDialog';
+import { ConfirmLeaveGroupDialog } from '../../navbarDialogs/ConfirmLeaveGroupDialog';
 import { ConfirmDeleteGroupDialog } from '../../navbarDialogs/DeleteGroupDialog';
 import { doGet } from '../../utils/fetch-utils';
 import './NavigationNavbar.css';
@@ -43,8 +43,8 @@ export const NavigationNavbar = ({ buttonsData, groupId }) => {
     useEffect(() => {
         if (groupId) {
             //zakomentowane getIsCoordinator, żeby sprawdzić opcje dla koordynatora - zawsze user koordynatorem
-            // getIsCoordinator();
-            setIsCoordinator(true);
+            getIsCoordinator();
+            // setIsCoordinator(true);
             getTripData();
         }
         getUserData();
@@ -68,6 +68,7 @@ export const NavigationNavbar = ({ buttonsData, groupId }) => {
             userId: response.userId, email: response.email, firstName: response.firstName, surname: response.surname,
             code: code, phone: phoneNumber, birthDate: response.birthday
         });
+        console.log(userData);
     };
 
     const getIsCoordinator = async () => {
@@ -147,13 +148,13 @@ export const NavigationNavbar = ({ buttonsData, groupId }) => {
                 onClose={() => setDeleteGroupDialogOpen(false)}
                 groupId={groupId}
             />
-            {/*
+
             <ConfirmLeaveGroupDialog
                 open={leaveGroupDialogOpen}
                 onClose={() => setLeaveGroupDialogOpen(false)}
                 groupId={groupId}
             />
-            */}
+
             <ConfirmLogoutDialog
                 open={userLogoutDialogOpen}
                 onClose={() => setUserLogoutDialogOpen(false)}
@@ -164,13 +165,13 @@ export const NavigationNavbar = ({ buttonsData, groupId }) => {
                 onClose={() => setTripGroupOptionsDialogOpen(false)}
                 groupId={groupId}
             />
-            {/*
+
             {userOptionsDialogOpen && <UserOptionsDialog
                 open
                 onClose={() => setUserOptionsDialogOpen(false)}
                 userData={userData}
             />
-            } */}
+            }
             <Box sx={{ flexGrow: 1 }}>
                 <AppBar
                     sx={{

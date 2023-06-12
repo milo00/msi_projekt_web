@@ -27,14 +27,13 @@ export const InviteDialog = ({ open, onClose, groupId, inviteLink, copiedText, e
     // const getInvitationLink = async () => {
     //     await doGet('/api/v1/invitation?' + new URLSearchParams({ group: groupId }).toString())
     //         .then(response => {
-    //             setInviteLink(response.headers.get('Location').replace('http://localhost:8080/api/v1/invitation/', 'http://localhost:3000/invite'))
-    //             setCopiedtext(response.headers.get('Location').replace('http://localhost:8080/api/v1/invitation/', 'http://localhost:3000/invite'))
+    //             setInviteLink(response.headers.get('Location').replace('https://localhost:8080/api/v1/invitation/', 'https://localhost:3000/invite'))
+    //             setCopiedtext(response.headers.get('Location').replace('https://localhost:8080/api/v1/invitation/', 'https://localhost:3000/invite'))
     //         })
     //         .catch(err => {
     //             setErrorToastOpen(true)
     //             setCreationError(err.message)
     //         });
-    //     console.log('kupa')
     // }
 
     // useEffect(() => {

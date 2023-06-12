@@ -349,16 +349,16 @@ export const RegisterPage = () => {
                                                 <DatePicker
                                                     disableFuture
                                                     label="Birth date"
+                                                    sx={{
+                                                        svg: { color: "#2ab7ca" },
+                                                        mt: 1,
+                                                        mb: 1,
+                                                        width: "50%",
+                                                        minWidth: "200px"
+                                                    }}
                                                     renderInput={(params) =>
                                                         <TextField
                                                             {...params}
-                                                            sx={{
-                                                                svg: { color: "#2ab7ca" },
-                                                                mt: 1,
-                                                                mb: 1,
-                                                                width: "50%",
-                                                                minWidth: "200px"
-                                                            }}
                                                             onKeyDown={onKeyDown}
                                                             error={!!errors.birthDate}
                                                             helperText={errors.birthDate?.message}

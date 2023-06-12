@@ -16,6 +16,7 @@ import { TextField } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import isValid from 'date-fns/isValid';
@@ -38,6 +39,7 @@ import parseISO from 'date-fns/parseISO';
 import { SuccessToast } from '../toasts/SuccessToast';
 import { ErrorToast } from '../toasts/ErrorToast';
 import { doPatch } from "../../components/utils/fetch-utils";
+import { TextFieldsTwoTone } from '@mui/icons-material';
 
 
 const icons = [
@@ -94,8 +96,8 @@ export const EditDayPlanDialog = ({ open, onClose, dayPlanData, onSuccess }) => 
 
     const today = new Date();
     //do przywrócenia
-    // const initialDate = format(parseISO(dayPlanData.date), "MM/dd/yyyy");
-    const initialDate = new Date();
+    const initialDate = parseISO(dayPlanData.date);
+    // const initialDate = new Date();
     const [isEditing, setIsEditing] = useState(false);
     const [successToastOpen, setSuccessToastOpen] = useState(false);
     const [errorToastOpen, setErrorToastOpen] = useState(false);
@@ -164,9 +166,9 @@ export const EditDayPlanDialog = ({ open, onClose, dayPlanData, onSuccess }) => 
         console.log(values);
     };
 
-    const handleEditDayPlan = async (dayPlanName, date, icon) => {
+    const handleEditDayPlan = async (values) => {
         setIsEditing(true);
-        var postBody = { 'groupId': groupId, 'name': dayPlanName, 'date': format(new Date(Date.parse(date)), "yyyy-MM-dd"), 'iconType': icon };
+        var postBody = { 'groupId': groupId, 'name': values.dayPlanName, 'date': format(new Date(Date.parse(values.date)), "yyyy-MM-dd"), 'iconType': values.icon };
         await doPatch('/api/v1/day-plan?dayPlanId=' + dayPlanData.dayPlanId, postBody)
             .then(response => {
                 setSuccessToastOpen(response.ok);
@@ -227,7 +229,7 @@ export const EditDayPlanDialog = ({ open, onClose, dayPlanData, onSuccess }) => 
                 </DialogTitle>
                 <DialogContent>
                     <form
-                        onSubmit={handleSubmit(() => handleEditDayPlan(dayPlanName.value, values.date, values.icon))}
+                        onSubmit={handleSubmit(handleEditDayPlan)}
                     >
                         <TextField
                             type='string'
@@ -255,7 +257,41 @@ export const EditDayPlanDialog = ({ open, onClose, dayPlanData, onSuccess }) => 
                         />
                         <Box sx={{ display: "flex", flexDirection: "column", minWidth: "200px", width: "200px" }}>
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                <DatePicker
+                                <Controller
+                                    name={"date"}
+                                    control={control}
+                                    sx={{ mb: 1 }}
+                                    render={({ field: { onChange, value } }) =>
+                                        <DatePicker
+                                            disablePast
+                                            label="Date"
+                                            sx={{
+                                                svg: { color: "#2ab7ca" },
+                                                mt: 1,
+                                                mb: 1,
+                                                width: "50%",
+                                                minWidth: "200px"
+                                            }}
+                                            // renderInput={(params) =>
+                                            //     <TextField
+                                            //         {...params}
+                                            //         onKeyDown={onKeyDown}
+                                            //         error={!!errors.date}
+                                            //         helperText={errors.date?.message}
+                                            //     />
+                                            // }
+                                            onKeyDown={onKeyDown}
+                                            error={!!errors.date}
+                                            helperText={errors.date?.message}
+                                            defaultValue={values.date}
+                                            onChange={(date) => {
+                                                onChange(date);
+                                            }}
+                                        />
+                                    }
+                                />
+
+                                {/* <DatePicker
                                     disablePast
                                     onChange={(newDate) => {
                                         handleChange({ ...values, date: newDate });
@@ -286,7 +322,7 @@ export const EditDayPlanDialog = ({ open, onClose, dayPlanData, onSuccess }) => 
                                             }}
                                         />
                                     }
-                                />
+                                /> */}
                             </LocalizationProvider>
                         </Box>
                         <DialogContentText variant="body1" sx={{ mt: 1, mb: -1 }}>

@@ -119,10 +119,10 @@ export const TripGroupOptionsDialog = ({ open, onClose, groupId }) => {
         currency: Yup
             .string()
             .required("You have to provide currency for trip group"),
-        minDays: Yup
-            .number()
-            .min(1, "Number of days must be equal or higher than 1")
-            .required("You have to provide duration of the trip"),
+        // minDays: Yup
+        //     .number()
+        //     .min(1, "Number of days must be equal or higher than 1")
+        //     .required("You have to provide duration of the trip"),
         // minParticipants: Yup
         //     .number()
         //     .min(1, "Number of participants must be equal or higher than 1")
@@ -144,9 +144,9 @@ export const TripGroupOptionsDialog = ({ open, onClose, groupId }) => {
         setTripData({
             tripName: response.name,
             //zamiana na destination? 
-            startingLocation: response.startLocation,
+            destination: response.destinationLocation,
             currency: response.currency,
-            minDays: response.minimalNumberOfDays,
+            // minDays: response.minimalNumberOfDays,
             // minParticipants: response.minimalNumberOfParticipants, 
             description: response.description
         })
@@ -174,8 +174,8 @@ export const TripGroupOptionsDialog = ({ open, onClose, groupId }) => {
             'currency': values.currency,
             'description': values.description,
             // zmiana na destination?
-            'startLocation': values.startingLocation,
-            'minimalNumberOfDays': values.minDays,
+            'destinationLocation': values.destination,
+            // 'minimalNumberOfDays': values.minDays,
             // 'minimalNumberOfParticipants': values.minParticipants
         };
 
@@ -341,7 +341,7 @@ export const TripGroupOptionsDialog = ({ open, onClose, groupId }) => {
                                                     margin="normal"
                                                     placeholder='Destination'
                                                     name='destination'
-                                                    defaultValue={tripData.destination}
+                                                    defaultValue={tripData.destinationLocation}
                                                     disabled={isPlanningStage}
                                                     label='Destination'
                                                     fullWidth
@@ -390,7 +390,7 @@ export const TripGroupOptionsDialog = ({ open, onClose, groupId }) => {
                                                                 ))}
                                                             </TextField>)}
                                                     />
-                                                    <TextField
+                                                    {/* <TextField
                                                         sx={{ minWidth: "150px", width: "150px" }}
                                                         type="number"
                                                         margin="normal"
@@ -410,7 +410,7 @@ export const TripGroupOptionsDialog = ({ open, onClose, groupId }) => {
                                                         {...register('minDays')}
                                                         error={!!errors.minDays}
                                                         helperText={errors.minDays?.message}
-                                                    />
+                                                    /> */}
                                                     {/* <TextField
                                                         sx={{ minWidth: "150px", width: "150px" }}
                                                         type="number"

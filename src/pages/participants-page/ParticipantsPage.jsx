@@ -49,12 +49,28 @@ export const ParticipantsPage = () => {
 
     const [inviteDialogOpen, setInviteDialogOpen] = useState(false);
 
+    // const inviteAction = async () => {
+    //     await doGet('/api/v1/invitation?' + new URLSearchParams({ group: groupId }).toString())
+    //         .then(response => {
+    //             if (response.ok) {
+    //                 setInviteLink(response.headers.get('Location'))
+    //                 setCopiedtext(response.headers.get('Location'))
+    //                 setInviteDialogOpen(true);
+    //             }
+
+    //         })
+    //         .catch(err => {
+    //             setErrorToastOpen(true)
+    //             setCreationError(err.message)
+    //         });
+    // }
+
     const inviteAction = async () => {
         await doGet('/api/v1/invitation?' + new URLSearchParams({ group: groupId }).toString())
             .then(response => {
                 if (response.ok) {
-                    setInviteLink(response.headers.get('Location'))
-                    setCopiedtext(response.headers.get('Location'))
+                    setInviteLink(response.headers.get('Location').replace('https://localhost:8080/api/v1/invitation/', 'http://localhost:3000/invite'))
+                    setCopiedtext(response.headers.get('Location').replace('https://localhost:8080/api/v1/invitation/', 'http://localhost:3000/invite'))
                     setInviteDialogOpen(true);
                 }
 
@@ -140,8 +156,8 @@ export const ParticipantsPage = () => {
                             <Button
                                 variant="contained"
                                 sx={{ borderRadius: 10, color: "#FFFFFF", width: "120px" }}
-                                // onClick={inviteAction}
-                                onClick={() => setInviteDialogOpen(true)}
+                                onClick={inviteAction}
+                            // onClick={() => setInviteDialogOpen(true)}
                             >
                                 Invite
                                 <PersonAddIcon sx={{ ml: 2 }} />

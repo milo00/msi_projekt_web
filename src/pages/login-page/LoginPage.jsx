@@ -64,48 +64,48 @@ export const LoginPage = () => {
         defaultValues: defaultInputValues
     });
 
-    // const handleLogin = async (values) => {
-    //     setLoginLoading(true);
-    //     var postBody = {
-    //         'email': values.email,
-    //         'password': values.password,
-    //     };
-    //     await doPost('/api/v1/auth/login', postBody, false)
-    //         .then(response => {
-    //             if (response.ok) {
-    //                 sessionStorage.setItem("ACCESS_TOKEN", response.headers.get('Authorization'))
-    //             }
-    //             setInvalidData(false);
-    //             return response.json();
-    //         })
-    //         .then(json => {
-    //             sessionStorage.setItem("userId", json.userId)
-    //             reset();
-    //             if (searchParams.get("redirectTo") !== null) {
-    //                 navigate(searchParams.get("redirectTo"))
-    //             } else {
-    //                 navigate("/dashboard");
-    //             }
+    const handleLogin = async (values) => {
+        setLoginLoading(true);
+        var postBody = {
+            'email': values.email,
+            'password': values.password,
+        };
+        await doPost('/api/v1/auth/login', postBody, false)
+            .then(response => {
+                if (response.ok) {
+                    sessionStorage.setItem("ACCESS_TOKEN", response.headers.get('Authorization'))
+                }
+                setInvalidData(false);
+                return response.json();
+            })
+            .then(json => {
+                sessionStorage.setItem("userId", json.userId)
+                reset();
+                if (searchParams.get("redirectTo") !== null) {
+                    navigate(searchParams.get("redirectTo"))
+                } else {
+                    navigate("/dashboard");
+                }
 
-    //         })
-    //         .catch(err => {
-    //             setLoginLoading(false);
-    //             if (err.message === '401') {
-    //                 setInvalidData(true);
-    //             } else {
-    //                 setErrorToastOpen(true);
-    //             }
+            })
+            .catch(err => {
+                setLoginLoading(false);
+                if (err.message === '401') {
+                    setInvalidData(true);
+                } else {
+                    setErrorToastOpen(true);
+                }
 
-    //         });
-    //     // reset();
-    // };
-
-    const handleLogin = (values) => {
-        console.log(values);
-        console.log(getValues());
-        reset();
-        navigate("/dashboard");
+            });
+        // reset();
     };
+
+    // const handleLogin = (values) => {
+    //     console.log(values);
+    //     console.log(getValues());
+    //     reset();
+    //     navigate("/dashboard");
+    // };
 
     const onKeyDown = (e) => {
         e.preventDefault();
@@ -128,8 +128,6 @@ export const LoginPage = () => {
         } else {
             navigate("/register");
         }
-
-
     }
 
     return (

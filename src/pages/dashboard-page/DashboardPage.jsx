@@ -134,13 +134,13 @@ export const DashboardPage = () => {
                 borderRadius: "20px"
             }}
             >
-                <CurrentTrips trips={testTrips} isLoading={isLoading} />
+                <CurrentTrips trips={tripsList} isLoading={isLoading} />
 
                 {/* <Divider variant="middle" /> */}
                 {/* <FutureTrips trips={testTrips} /> */}
 
-                <Divider variant="middle" />
-                <PastTrips trips={testTrips} isLoading={isLoading} />
+                {/* <Divider variant="middle" /> */}
+                {/* <PastTrips trips={testTrips} isLoading={isLoading} /> */}
             </Card>
         </>
     );

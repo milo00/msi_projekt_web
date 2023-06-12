@@ -3,7 +3,7 @@ export const MAPS2 = 'https://img.freepik.com/darmowe-wektory/stary-szablon-mapy
 
 export const BARCELONAURL = 'https://f4fcdn.eu/wp-content/uploads/2021/12/barcelona-z-gory.jpg';
 export const ROMEURL = 'https://www.umultirank.org/export/sites/default/.galleries/generic-images/Others/Winter-Calendar/architecture-4529605_1280.jpg_1729757344.jpg';
-export const LONDONURL = 'https://www.history.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTYyNDg1MjE3MTI1Mjc5Mzk4/topic-london-gettyimages-760251843-promo.jpg';
+export const LONDONURL = 'https://i2-prod.mirror.co.uk/incoming/article28871026.ece/ALTERNATES/s1200c/0_London-at-sunset.jpg';
 export const GLOBEURL = 'https://storage.googleapis.com/pod_public/1300/121874.jpg';
 export const AMSTERDAMURL = 'https://www.national-geographic.pl/media/cache/big/uploads/media/default/0014/03/amsterdam-jak-sie-przygotowac-do-wyjazdu-poznaj-ciekawostki-kulture-atrakcje-i-zabytki-amsterdamu-fot-getty-images.jpeg';
 export const MILANURL = 'https://media.zielonamapa.pl/images/europa/wlochy/mediolan/mediolan.jpg?tr=n-open_graph';

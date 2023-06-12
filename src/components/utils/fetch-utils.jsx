@@ -1,4 +1,6 @@
-export const URL_PREFIX = 'https://51.132.58.149:8443';
+// export const URL_PREFIX = 'https://51.132.58.149:8443';
+// export const URL_PREFIX = process.env.NODE_ENV === 'development' ? 'https://localhost:8080' : '';
+export const URL_PREFIX = 'https://localhost:8080';
 
 export const doGet = (endpoint) => {
     const headers = addAuthorizationHeader({
@@ -71,6 +73,7 @@ export const doPut = (endpoint) => {
 }
 const addAuthorizationHeader = (headers) => {
     const jwt = sessionStorage.getItem("ACCESS_TOKEN")
+    // const jwt = localStorage.getItem("ACCESS_TOKEN")
 
     if (jwt) {
         return {
@@ -85,11 +88,11 @@ const addAuthorizationHeader = (headers) => {
 const checkForError = async (response) => {
     if (!response.ok) {
 
-        if (response.status === 401 && response.url !== 'https://51.132.58.149:8443/api/v1/auth/login') {
+        if (response.status === 401 && response.url !== 'https://localhost:8080/api/v1/auth/login') {
             window.location.replace('https://travelnow.vercel.app/login');
         }
 
-        if (response.status === 401 && response.url === 'https://51.132.58.149:8443/api/v1/auth/login') {
+        if (response.status === 401 && response.url === 'https://localhost:8080/api/v1/auth/login') {
             throw new Error("401")
         }
 

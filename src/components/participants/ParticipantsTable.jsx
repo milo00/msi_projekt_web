@@ -20,24 +20,24 @@ import { PromoteParticipantDialog } from './PromoteParticipantDialog';
 import { ParticipantsAvailabilityDialog } from '../availability/ParticipantsAvailabilityDialog';
 import { doGet } from "../../components/utils/fetch-utils";
 
-const participants = [
-    {
-        userId: 1,
-        firstName: "Krzysztof",
-        surname: "Bialik",
-        phoneNumber: "123456789",
-        email: "254573@student.pwr.edu.pl",
-        role: "COORDINATOR"
-    },
-    {
-        userId: 2,
-        firstName: "Krzysztof",
-        surname: "Bialik",
-        phoneNumber: "123456789",
-        email: "254573@student.pwr.edu.pl",
-        role: "PARTICIPANT"
-    }
-]
+// const participants = [
+//     {
+//         userId: 1,
+//         firstName: "Krzysztof",
+//         surname: "Bialik",
+//         phoneNumber: "123456789",
+//         email: "254573@student.pwr.edu.pl",
+//         role: "COORDINATOR"
+//     },
+//     {
+//         userId: 2,
+//         firstName: "Krzysztof",
+//         surname: "Bialik",
+//         phoneNumber: "123456789",
+//         email: "254573@student.pwr.edu.pl",
+//         role: "PARTICIPANT"
+//     }
+// ]
 
 function CustomToolbar() {
     return (
@@ -63,17 +63,17 @@ export const ParticipantsTable = ({ groupStage, isCoordinator, groupId }) => {
     const [usersAvailability, setUsersAvailability] = useState([]);
     const [userFullName, setUserFullName] = useState("");
 
-    // const getUsersData = async () => {
-    //     await doGet('/api/v1/user-group/participants?' + new URLSearchParams({ groupId: groupId }).toString())
-    //         .then(response => response.json())
-    //         .then(response => setUsersData(response))
-    //         .catch(err => console.log('Request Failed', err));
+    const getUsersData = async () => {
+        await doGet('/api/v1/user-group/participants?' + new URLSearchParams({ groupId: groupId }).toString())
+            .then(response => response.json())
+            .then(response => setUsersData(response))
+            .catch(err => console.log('Request Failed', err));
 
-    //     await doGet('/api/v1/user-group/coordinators?' + new URLSearchParams({ groupId: groupId }).toString())
-    //         .then(response => response.json())
-    //         .then(response => setGroupCoordinators(response))
-    //         .catch(err => console.log('Request Failed', err));
-    // };
+        await doGet('/api/v1/user-group/coordinators?' + new URLSearchParams({ groupId: groupId }).toString())
+            .then(response => response.json())
+            .then(response => setGroupCoordinators(response))
+            .catch(err => console.log('Request Failed', err));
+    };
 
     const getAvailabilities = async () => {
         await doGet('/api/v1/availability/group/' + groupId)
@@ -85,8 +85,8 @@ export const ParticipantsTable = ({ groupStage, isCoordinator, groupId }) => {
     };
 
     useEffect(() => {
-        setUsersData(participants);
-        // getUsersData();
+        // setUsersData(participants);
+        getUsersData();
         getAvailabilities();
     }, []);
 
@@ -297,17 +297,17 @@ export const ParticipantsTable = ({ groupStage, isCoordinator, groupId }) => {
             let surname = usersData[i].surname;
             let phoneNumber = usersData[i].phoneNumber;
             let email = usersData[i].email;
-            let role = usersData[i].role;
+            // let role = usersData[i].role;
 
 
-            // let role;
+            let role;
             // zakomentowane na etap api
-            // if (groupCoordinators.some(coordinator => coordinator.userId === usersData[i].userId)) {
-            //     role = "COORDINATOR"
-            // }
-            // else {
-            //     role = "PARTICIPANT";
-            // }
+            if (groupCoordinators.some(coordinator => coordinator.userId === usersData[i].userId)) {
+                role = "COORDINATOR"
+            }
+            else {
+                role = "PARTICIPANT";
+            }
             user['userId'] = userId;
             user['firstName'] = firstName;
             user['surname'] = surname;
@@ -333,16 +333,16 @@ export const ParticipantsTable = ({ groupStage, isCoordinator, groupId }) => {
                     groupId={groupId}
                     userId={userId}
                     isDeletingHimself={isDeletingHimself}
-                    // onSuccess={() => getUsersData()}
-                    onSuccess={() => setUsersData(participants)}
+                    onSuccess={() => getUsersData()}
+                // onSuccess={() => setUsersData(participants)}
                 />
                 <PromoteParticipantDialog
                     open={promoteDialogOpen}
                     onClose={() => { setPromoteDialogOpen(false) }}
                     groupId={groupId}
                     userId={userId}
-                    // onSuccess={() => getUsersData()}
-                    onSuccess={() => setUsersData(participants)}
+                    onSuccess={() => getUsersData()}
+                // onSuccess={() => setUsersData(participants)}
 
                 />
                 <ParticipantsAvailabilityDialog

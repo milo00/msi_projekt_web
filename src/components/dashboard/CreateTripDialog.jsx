@@ -84,8 +84,8 @@ export const CreateTripDialog = ({ open, onClose, createTrip, onSuccess }) => {
         tripName: "",
         destination: "",
         currency: "",
-        minDays: 0,
-        minParticipants: 0,
+        // minDays: 0,
+        // minParticipants: 0,
         description: ""
     };
 
@@ -101,10 +101,10 @@ export const CreateTripDialog = ({ open, onClose, createTrip, onSuccess }) => {
         currency: Yup
             .string()
             .required("You have to provide currency for trip group"),
-        minDays: Yup
-            .number()
-            .min(1, "Number of days must be equal or higher than 1")
-            .required("You have to provide duration of the trip"),
+        // minDays: Yup
+        //     .number()
+        //     .min(1, "Number of days must be equal or higher than 1")
+        //     .required("You have to provide duration of the trip"),
         // minParticipants: Yup
         //     .number()
         //     .min(1, "Number of participants must be equal or higher than 1")
@@ -133,11 +133,12 @@ export const CreateTripDialog = ({ open, onClose, createTrip, onSuccess }) => {
             'name': values.tripName,
             'currency': values.currency,
             'description': values.description,
-            'votesLimit': 0,
+            'destinationLocation': values.destination,
+            // 'votesLimit': 0,
             //zamiana na destination?
-            'startLocation': values.startingLocation,
-            'startCity': values.startingLocation,
-            'minimalNumberOfDays': values.minDays,
+            // 'startLocation': values.startingLocation,
+            // 'startCity': values.startingLocation,
+            // 'minimalNumberOfDays': values.minDays,
             // 'minimalNumberOfParticipants': values.minParticipants
         };
         await doPost('/api/v1/trip-group/group', postBody)
@@ -271,7 +272,7 @@ export const CreateTripDialog = ({ open, onClose, createTrip, onSuccess }) => {
                                         ))}
                                     </TextField>)}
                             />
-                            <TextField
+                            {/* <TextField
                                 sx={{ minWidth: "150px", width: "150px" }}
                                 type="number"
                                 margin="normal"
@@ -289,7 +290,7 @@ export const CreateTripDialog = ({ open, onClose, createTrip, onSuccess }) => {
                                 {...register('minDays')}
                                 error={!!errors.minDays}
                                 helperText={errors.minDays?.message}
-                            />
+                            /> */}
                             {/* <TextField
                                 sx={{ minWidth: "150px", width: "150px" }}
                                 type="number"
