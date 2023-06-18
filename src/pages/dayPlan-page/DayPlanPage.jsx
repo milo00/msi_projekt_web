@@ -17,6 +17,7 @@ import { Switch } from "@mui/material";
 import { FormControlLabel } from "@mui/material";
 import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
+import { Tooltip } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import SearchIcon from '@mui/icons-material/Search';
@@ -27,6 +28,7 @@ import { CreateDayPlanDialog } from "../../components/dayPlans/CreateDayPlanDial
 import { DayPlanCard } from "../../components/dayPlans/DayPlanCard";
 import { AttractionCard } from "../../components/attraction/AttractionCard";
 import { SearchAttractionDialog } from "../../components/attraction/SearchAttractionDialog";
+import { SearchNearbyAttractionDialog } from "../../components/attraction/SearchNearbyAttractionDialog";
 import { doGet, doGetAwait } from "../../components/utils/fetch-utils";
 import { CircularProgress } from "@mui/material";
 import TripOriginRoundedIcon from '@mui/icons-material/TripOriginRounded';
@@ -68,6 +70,7 @@ export const DayPlanPage = (props) => {
     const { groupId } = useParams();
     const [createDayPlanDialogOpen, setCreateDayPlanDialogOpen] = useState(false);
     const [searchAttractionDialogOpen, setSearchAttractionDialogOpen] = useState(false);
+    const [searchAttractionNearbyDialogOpen, setSearchAttractionNearbyDialogOpen] = useState(false);
     const [dayPlanName, setDayPlanName] = useState("");
     const [dayPlanDate, setDayPlanDate] = useState("");
     const [allAttractions, setAllAttractions] = useState([]);
@@ -80,8 +83,9 @@ export const DayPlanPage = (props) => {
     const [isOptimizedDayPlan, setIsOptimizedDayPlan] = useState(false);
     const [deleteDayPlanConfirmToastOpen, setDeleteDayPlanConfirmToastOpen] = useState(false);
     const [deleteAttractionConfirmToastOpen, setDeleteAttractionConfirmToastOpen] = useState(false);
-    const [tripGroup, setTripGroup] = useState([])
+    const [tripGroup, setTripGroup] = useState([]);
     const [isCoordinator, setIsCoordinator] = useState(false);
+    const [currentLocation, setCurrentLocation] = useState({});
 
     // var isCordinator = true;
 
@@ -99,7 +103,15 @@ export const DayPlanPage = (props) => {
         getIsCoordinator();
         getData();
         getTripData();
-    }, [])
+        getLocation();
+    }, []);
+
+    const getLocation = () => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            const { latitude, longitude } = position.coords;
+            setCurrentLocation({ latitude, longitude });
+        });
+    };
 
     // const isCorinator = async () => {
     //     var resp = await doGet('/api/v1/user-group/role?' + new URLSearchParams({ groupId: groupId, userId: sessionStorage.getItem("userId") }).toString())
@@ -290,6 +302,12 @@ export const DayPlanPage = (props) => {
                 dayPlanId={selectedDayPlanId}
                 onSuccess={(id) => updateDayplanAttractions(id)}
             />
+            <SearchNearbyAttractionDialog
+                open={searchAttractionNearbyDialogOpen}
+                onClose={() => setSearchAttractionNearbyDialogOpen(false)}
+                dayPlanId={selectedDayPlanId}
+                onSuccess={(id) => updateDayplanAttractions(id)}
+            />
             <Box
                 sx={{
                     position: 'relative',
@@ -367,7 +385,6 @@ export const DayPlanPage = (props) => {
                                         </Box>
 
                                         {isCoordinator &&
-                                            // {isCordinator &&
                                             <Button
                                                 variant="contained"
                                                 sx={{
@@ -477,7 +494,7 @@ export const DayPlanPage = (props) => {
                                                 Detailed plan
                                             </Typography>
                                         </Box>
-                                        <Box>
+                                        <Box sx={{ display: "flex", justifyContent: "space-between", flexDirection: "row" }}>
                                             {selectedDayPlanId > 0 &&
                                                 <FormControlLabel
                                                     value="Optimize day plan"
@@ -488,20 +505,39 @@ export const DayPlanPage = (props) => {
                                                 />
                                             }
                                             {(isCoordinator && selectedDayPlanId > 0) &&
-                                                <Button
-                                                    variant="contained"
-                                                    sx={{
-                                                        backgroundColor: "secondary.main",
-                                                        borderRadius: "20px",
-                                                        mr: "20px",
-                                                        "&:hover": { backgroundColor: "secondary.dark" }
-                                                    }}
-                                                    onClick={() => setSearchAttractionDialogOpen(true)}
-                                                >
-                                                    <AddIcon />
-                                                    Add
-                                                </Button>
-
+                                                <Box sx={{ display: "flex", justifyContent: "space-between", flexDirection: "row" }}>
+                                                    <Tooltip title={Object.keys(currentLocation).length === 0 && "Please allow sharing your location to add nearby attractions"}>
+                                                        <span>
+                                                            <Button
+                                                                variant="contained"
+                                                                disabled={Object.keys(currentLocation).length === 0}
+                                                                sx={{
+                                                                    backgroundColor: "secondary.main",
+                                                                    borderRadius: "20px",
+                                                                    "&:hover": { backgroundColor: "secondary.dark" },
+                                                                    mr: 2,
+                                                                    minWidth: 10
+                                                                }}
+                                                                onClick={() => setSearchAttractionNearbyDialogOpen(true)}
+                                                            >
+                                                                <AddIcon />
+                                                                Add nearby
+                                                            </Button>
+                                                        </span>
+                                                    </Tooltip>
+                                                    <Button
+                                                        variant="contained"
+                                                        sx={{
+                                                            backgroundColor: "secondary.main",
+                                                            borderRadius: "20px",
+                                                            "&:hover": { backgroundColor: "secondary.dark" }
+                                                        }}
+                                                        onClick={() => setSearchAttractionDialogOpen(true)}
+                                                    >
+                                                        <AddIcon />
+                                                        Add
+                                                    </Button>
+                                                </Box>
                                             }
                                         </Box>
                                     </Box>

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState } from "react";
+import { useEffect } from 'react';
 import { Button, Typography } from '@mui/material';
 import { Box } from '@mui/material';
 import { IconButton } from '@mui/material';
@@ -13,6 +14,11 @@ import { FormHelperText } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CardMedia } from '@mui/material';
+import { Grid } from '@mui/material';
+import { MarkerF } from '@react-google-maps/api';
+import { GoogleMap } from '@react-google-maps/api';
+import { DirectionsRenderer } from '@react-google-maps/api';
+import { useLoadScript } from '@react-google-maps/api';
 import * as Yup from 'yup';
 import CloseIcon from '@mui/icons-material/Close';
 import { SuccessToast } from '../toasts/SuccessToast';
@@ -21,7 +27,15 @@ import { doPost } from "../../components/utils/fetch-utils";
 import { PLACEHOLDER_IMAGE } from '../images/Images';
 
 
-export const SelectAttractionDialog = ({ open, onClose, attractionData, closeWithSelect, dayPlanId }) => {
+
+export const SelectAttractionDialog = ({ open, onClose, attractionData, closeWithSelect, dayPlanId, currentLocation }) => {
+
+    const [directionsResponse, setDirectionsResponse] = useState(null);
+    const [distance, setDistance] = useState('');
+    const [duration, setDuration] = useState('');
+    const { isLoaded } = useLoadScript({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    });
 
     const [successToastOpen, setSuccessToastOpen] = useState(false);
     const [errorToastOpen, setErrorToastOpen] = useState(false);
@@ -38,7 +52,30 @@ export const SelectAttractionDialog = ({ open, onClose, attractionData, closeWit
         description
     };
 
+    const center = { lat: currentLocation.latitude, lng: currentLocation.longitude }
+    const origin = `${currentLocation.latitude}, ${currentLocation.longitude}`
+    const destination = `${attractionData.latitude}, ${attractionData.longitude}`
+    const tripPoints = { origin: origin, destination: destination }
+
     const [values, setValues] = useState(defaultInputValues);
+
+    useEffect(() => {
+        Object.keys(currentLocation).length > 0 && calculateRoute();
+    }, [open]);
+
+    async function calculateRoute() {
+        // eslint-disable-next-line no-undef
+        const directionsService = new google.maps.DirectionsService();
+        const results = await directionsService.route({
+            origin: center,
+            destination: destination,
+            // eslint-disable-next-line no-undef
+            travelMode: 'WALKING'
+        })
+        setDirectionsResponse(results);
+        setDistance(results.routes[0].legs[0].distance.text);
+        setDuration(results.routes[0].legs[0].duration.text);
+    };
 
     var getPhotoUrl = (photoReference) => {
         return 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + photoReference + '&key=' + process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
@@ -85,6 +122,7 @@ export const SelectAttractionDialog = ({ open, onClose, attractionData, closeWit
 
     return (
         <div>
+            {console.log(attractionData)}
             <SuccessToast open={successToastOpen} onClose={() => setSuccessToastOpen(false)} message="Attraction successfully added." />
             <ErrorToast open={errorToastOpen} onClose={() => setErrorToastOpen(false)} message={creationError} />
             <Dialog
@@ -190,6 +228,46 @@ export const SelectAttractionDialog = ({ open, onClose, attractionData, closeWit
                             <span>{descriptionError}</span>
                             <span>{`${description.length}/${DESCRIPTION_LIMIT}`}</span>
                         </FormHelperText>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyItems: "center",
+                                alignItems: "center",
+                                justifyContent: "space-around",
+                                minHeight: "400px",
+                                mt: -4
+                            }}
+                        >
+                            <Grid container sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                <Grid item xs={7} sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "400px", minWidth: "400px" }}>
+                                    {isLoaded ?
+                                        Object.keys(currentLocation).length > 0 ?
+                                            <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "start" }}>
+                                                <Typography>
+                                                    Distance: {distance}
+                                                </Typography>
+                                                <Typography sx={{ my: 1 }}>
+                                                    Duration: {duration}
+                                                </Typography>
+                                                <GoogleMap
+                                                    zoom={14}
+                                                    center={center}
+                                                    mapContainerStyle={{ width: "400px", height: "300px" }}
+                                                >
+                                                    <MarkerF position={center} />
+                                                    {directionsResponse && <DirectionsRenderer directions={directionsResponse} options={{ strokeColor: "#2ab7ca" }} />}
+                                                </GoogleMap>
+                                            </Box>
+                                            :
+                                            <Typography>
+                                                Please allow sharing your location to see the map
+                                            </Typography>
+                                        :
+                                        <Typography variant="h1">Loading...</Typography>}
+                                </Grid>
+                            </Grid>
+                        </Box>
                         <DialogActions>
                             <Button
                                 variant="outlined"

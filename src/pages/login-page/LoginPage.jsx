@@ -119,15 +119,22 @@ export const LoginPage = () => {
         event.preventDefault();
     };
 
+    // const registerRedirect = () => {
+    //     if (searchParams.get("redirectTo") !== null) {
+    //         setInfoToastOpen(true);
+    //         setTimeout(() => {
+    //             navigate("/register");
+    //         }, 3000);
+    //     } else {
+    //         navigate("/register");
+    //     }
+    // }
+
     const registerRedirect = () => {
-        if (searchParams.get("redirectTo") !== null) {
-            setInfoToastOpen(true);
-            setTimeout(() => {
-                navigate("/register");
-            }, 3000);
-        } else {
+        setInfoToastOpen(true);
+        setTimeout(() => {
             navigate("/register");
-        }
+        }, 3000);
     }
 
     return (

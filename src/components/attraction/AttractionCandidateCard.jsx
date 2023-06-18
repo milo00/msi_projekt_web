@@ -6,13 +6,31 @@ import { Typography } from "@mui/material";
 import { ButtonBase } from "@mui/material";
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
+import CardActions from "@mui/material/CardActions";
+import { ExpandMore } from "@mui/icons-material";
+import Collapse from "@mui/material/Collapse";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MapIcon from '@mui/icons-material/Map';
 import { PLACEHOLDER_IMAGE } from "../images/Images";
 
 
 export const AttractionCandidateCard = ({ attractionData, openSelectAttractionDialog }) => {
 
-    const [mapsLink, setMapsLink] = useState(attractionData.photoLink)
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [expanded, setExpanded] = useState(false);
+    const [mapsLink, setMapsLink] = useState(attractionData.url);
+
+    const handleExpandClick = () => {
+        setExpanded(!expanded);
+    };
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     var getPhotoUrl = (photoReference) => {
         return 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + photoReference + '&key=' + process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
@@ -141,6 +159,37 @@ export const AttractionCandidateCard = ({ attractionData, openSelectAttractionDi
                         </Button>
                     </Box>
                 </CardContent>
+                {/* <CardActions
+                    sx={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        alignContent: "center",
+                        flexWrap: "wrap",
+                        mt: -8,
+                        mb: 1,
+                        ml: 1
+                    }}
+                >
+                    <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "flex-end", width: "50%" }}>
+                        <Box mx="10px">
+                            <ExpandMore
+                                expand={expanded}
+                                onClick={handleExpandClick}
+                                aria-expanded={expanded}
+                                aria-label="show more"
+                            >
+                                <ExpandMoreIcon sx={{ color: "primary.main" }} />
+                            </ExpandMore>
+                        </Box>
+                    </Box>
+                </CardActions>
+                <Collapse in={expanded} timeout="auto" unmountOnExit>
+                    <CardContent>
+                        <Typography paragraph>
+                            "No description provided" :
+                        </Typography>
+                    </CardContent>
+                </Collapse> */}
             </Card >
         </>
     );

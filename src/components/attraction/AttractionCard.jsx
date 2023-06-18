@@ -8,6 +8,7 @@ import { Typography } from "@mui/material";
 import { IconButton } from "@mui/material";
 import { Menu } from "@mui/material";
 import { MenuItem } from "@mui/material";
+import { Grid } from "@mui/material";
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { Collapse } from "@mui/material";
@@ -18,6 +19,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MapIcon from '@mui/icons-material/Map';
 import CheckIcon from '@mui/icons-material/Check';
+import { MarkerF } from '@react-google-maps/api';
+import { GoogleMap } from '@react-google-maps/api';
+import { DirectionsRenderer } from '@react-google-maps/api';
+import { useLoadScript } from '@react-google-maps/api';
 import { SelectStartingPointDialog } from "./SelectStartingPointDialog";
 import { EditAttractionDialog } from "./EditAttractionDialog";
 import { DeleteAttractionDialog } from "./DeleteAttractionDialog";
@@ -44,11 +49,46 @@ export const AttractionCard = ({ attractionData, groupId, id, onDeletion }) => {
     const [deleteAttractionDialogOpen, setDeleteAttractionDialogOpen] = useState(false);
     const [mapsLink, setMapsLink] = useState(attractionData.attractionLink);
     const open = Boolean(anchorEl);
-    const [isCoordinator, setIsCoordinator] = useState(false)
+    const [isCoordinator, setIsCoordinator] = useState(false);
+
+    const [currentLocation, setCurrentLocation] = useState({});
+    const [directionsResponse, setDirectionsResponse] = useState(null);
+    const [distance, setDistance] = useState('');
+    const [duration, setDuration] = useState('');
+
+    const center = { lat: currentLocation.latitude, lng: currentLocation.longitude };
+    const destination = { lat: attractionData.latitude, lng: attractionData.longitude }
+
 
     useEffect(() => {
         isCorinator();
     }, []);
+
+    useEffect(() => {
+        getLocation();
+        Object.keys(currentLocation).length > 0 && calculateRoute();
+    }, [expanded]);
+
+    const getLocation = () => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            const { latitude, longitude } = position.coords;
+            setCurrentLocation({ latitude, longitude });
+        });
+    };
+
+    async function calculateRoute() {
+        // eslint-disable-next-line no-undef
+        const directionsService = new google.maps.DirectionsService();
+        const results = await directionsService.route({
+            origin: center,
+            destination: destination,
+            // eslint-disable-next-line no-undef
+            travelMode: 'WALKING'
+        })
+        setDirectionsResponse(results);
+        setDistance(results.routes[0].legs[0].distance.text);
+        setDuration(results.routes[0].legs[0].duration.text);
+    };
 
     const isCorinator = async () => {
         var resp = await doGet('/api/v1/user-group/role?' + new URLSearchParams({ groupId: groupId, userId: sessionStorage.getItem("userId") }).toString())
@@ -57,6 +97,9 @@ export const AttractionCard = ({ attractionData, groupId, id, onDeletion }) => {
         setIsCoordinator(body);
     };
 
+    const { isLoaded } = useLoadScript({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    });
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -312,6 +355,32 @@ export const AttractionCard = ({ attractionData, groupId, id, onDeletion }) => {
                                 attractionData.description
                             }
                         </Typography>
+                        {Object.keys(currentLocation).length > 0 ?
+                            <Grid container sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                <Grid item xs={7} sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "400px", minWidth: "400px" }}>
+                                    <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "start" }}>
+                                        <Typography>
+                                            Distance: {distance}
+                                        </Typography>
+                                        <Typography sx={{ my: 1 }}>
+                                            Duration: {duration}
+                                        </Typography>
+                                        <GoogleMap
+                                            zoom={14}
+                                            center={center}
+                                            mapContainerStyle={{ width: "400px", height: "300px" }}
+                                        >
+                                            <MarkerF position={center} />
+                                            {directionsResponse && <DirectionsRenderer directions={directionsResponse} options={{ strokeColor: "#2ab7ca" }} />}
+                                        </GoogleMap>
+                                    </Box>
+                                </Grid>
+                            </Grid>
+                            :
+                            <Typography>
+                                Please allow sharing your location to see the map
+                            </Typography>
+                        }
                     </CardContent>
                 </Collapse>
             </Card >
