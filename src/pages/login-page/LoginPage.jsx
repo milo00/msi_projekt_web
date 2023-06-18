@@ -86,7 +86,6 @@ export const LoginPage = () => {
                 } else {
                     navigate("/dashboard");
                 }
-
             })
             .catch(err => {
                 setLoginLoading(false);

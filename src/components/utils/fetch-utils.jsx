@@ -87,9 +87,11 @@ const addAuthorizationHeader = (headers) => {
 
 const checkForError = async (response) => {
     if (!response.ok) {
+        console.log("Wykrycie błędu");
 
         if (response.status === 401 && response.url !== 'https://localhost:8080/api/v1/auth/login') {
             window.location.replace('https://localhost:3000/login');
+            console.log("Wchodzi tutaj");
         }
 
         if (response.status === 401 && response.url === 'https://localhost:8080/api/v1/auth/login') {

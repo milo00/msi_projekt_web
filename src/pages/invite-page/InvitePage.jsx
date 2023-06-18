@@ -32,7 +32,8 @@ export const InvitePage = () => {
                 .catch(err => {
                     console.log(err);
                     if (err.message === 'User is already a member of the group') {
-                        navigate("/login?");
+                        // navigate("/login?");
+                        navigate("/login?" + new URLSearchParams({ redirectTo: '/invite?token=' + searchParams.get("token") }).toString());
                     }
 
                 });
@@ -47,7 +48,7 @@ export const InvitePage = () => {
     return (
         <>
             <SimpleNavbar />
-            <Box
+            {/* <Box
                 sx={{
                     position: 'relative',
                     minHeight: '100%'
@@ -57,7 +58,7 @@ export const InvitePage = () => {
                         Test
                     </Card>
                 </Box>
-            </Box>
+            </Box> */}
         </>
     );
 };
