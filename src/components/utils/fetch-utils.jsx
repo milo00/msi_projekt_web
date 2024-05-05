@@ -1,6 +1,6 @@
 // export const URL_PREFIX = 'https://51.132.58.149:8443';
-// export const URL_PREFIX = process.env.NODE_ENV === 'development' ? 'https://localhost:8080' : '';
-export const URL_PREFIX = 'https://localhost:8080';
+// export const URL_PREFIX = process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : '';
+export const URL_PREFIX = 'http://localhost:8080';
 
 export const doGet = (endpoint) => {
     const headers = addAuthorizationHeader({
@@ -89,12 +89,12 @@ const checkForError = async (response) => {
     if (!response.ok) {
         console.log("Wykrycie błędu");
 
-        if (response.status === 401 && response.url !== 'https://localhost:8080/api/v1/auth/login') {
-            window.location.replace('https://localhost:3000/login');
+        if (response.status === 401 && response.url !== 'http://localhost:8080/api/v1/auth/login') {
+            window.location.replace('http://localhost:3000/login');
             console.log("Wchodzi tutaj");
         }
 
-        if (response.status === 401 && response.url === 'https://localhost:8080/api/v1/auth/login') {
+        if (response.status === 401 && response.url === 'http://localhost:8080/api/v1/auth/login') {
             throw new Error("401")
         }
 

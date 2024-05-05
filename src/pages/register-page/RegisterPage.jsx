@@ -261,16 +261,18 @@ export const RegisterPage = () => {
                   error={!!errors.surname}
                   helperText={errors.surname?.message}
                 />
-                <Typography variant="body1" color="text.secondary" mt="10px">
-                  Phone number:
-                </Typography>
-                <Box sx={{ display: "flex", mt: "-10px", mb: "10px" }}>
-                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                <Box sx={{ display: "flex", mb: "10px" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
                     <TextField
                       sx={{
                         minWidth: "100px",
                         maxWidth: "100px",
-                        mr: "50px",
+                        mr: "1rem",
                       }}
                       type="string"
                       margin="normal"
@@ -302,7 +304,7 @@ export const RegisterPage = () => {
                     </FormHelperText>
                   </Box>
                   <TextField
-                    sx={{ minWidth: "150px", maxWidth: "300px" }}
+                    sx={{ width: "100%" }}
                     type="string"
                     margin="normal"
                     placeholder="Phone"
@@ -436,7 +438,8 @@ export const RegisterPage = () => {
                     sx={{
                       mt: 3,
                       mb: 2,
-                      borderRadius: "20px",
+                      borderRadius: "0",
+                      boxShadow: 0,
                       width: "150px",
                       color: "#FFFFFF",
                     }}
@@ -451,7 +454,11 @@ export const RegisterPage = () => {
               </form>
               <Grid container justifyContent="center">
                 <Grid item>
-                  <Link href="/login" variant="body2">
+                  <Link
+                    href="/login"
+                    variant="body2"
+                    sx={{ cursor: "pointer" }}
+                  >
                     Already have an account? Sign in
                   </Link>
                 </Grid>

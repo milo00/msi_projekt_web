@@ -70,7 +70,7 @@ export const CurrentTrips = ({ trips }) => {
         <Box component="section" py={6} my={6}>
             <Container>
                 <Grid container item xs={11} spacing={3} alignItems="center" sx={{ mx: "auto" }}>
-                    <Typography variant="h3" sx={{ width: "100%", display: "flex", justifyContent: "center", mb: "30px" }}>Current trips</Typography>
+                    <Typography variant="h3" sx={{ width: "100%", display: "flex", justifyContent: "center", mb: "30px" }}>current trips</Typography>
                     {currentTrips.length === 0 ?
                         <Box sx={{
                             display: "flex",
@@ -81,7 +81,7 @@ export const CurrentTrips = ({ trips }) => {
                                 variant="h5"
                                 sx={{ margin: "50px", color: "primary.main" }}
                             >
-                                No current trips
+                                no current trips
                             </Typography>
                         </Box>
                         :

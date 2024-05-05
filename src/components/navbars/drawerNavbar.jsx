@@ -11,9 +11,9 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import logo from "../images/logo.png";
+import { ReactComponent as LogoSvg } from "../images/logo.svg";
 
 const drawerWidth = 240;
 
@@ -69,16 +69,17 @@ const DrawerAppBar = (props) => {
             href="/"
             sx={{
               display: { xs: "none", sm: "block" },
+              height: 30,
+              padding: 0,
             }}
           >
-            <img src={logo} height={32} />
+            <LogoSvg style={{ height: "100%", width: "100%" }} />
           </Button>
           <Box sx={{ display: { xs: "none", sm: "block" }, ml: "auto" }}>
             {navItems?.map((item) => (
               <Button
                 key={item[0]}
                 href={item[1]}
-                color="secondary"
                 variant="text"
                 sx={{ textTransform: "lowercase", marginLeft: 2 }}
               >

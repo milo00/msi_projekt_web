@@ -298,7 +298,11 @@ export const LoginPage = () => {
               </form>
               <Grid container justifyContent="center">
                 <Grid item>
-                  <Link role="button" onClick={registerRedirect} variant="body2">
+                  <Link
+                    onClick={registerRedirect}
+                    variant="body2"
+                    sx={{ cursor: "pointer" }}
+                  >
                     Don't have an account? Sign Up
                   </Link>
                 </Grid>

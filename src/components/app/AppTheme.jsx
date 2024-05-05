@@ -46,17 +46,17 @@ const MyTheme = createTheme({
       default: "#FFFFFFFF",
     },
     primary: {
-      main: "#F0CF90",
-      light: "#55ccd9",
-      dark: "#24939e",
+      main: "#34ADFE",
+      light: "#5DBEFE",
+      dark: "#0193F4",
     },
     primaryTransparent: {
       main: "#6655CCD9",
     },
     secondary: {
-      main: "#34ADFE",
-      light: "#ffe082",
-      dark: "#ffb201",
+      main: "#F0CF90",
+      light: "#F5E0B7",
+      dark: "#E7B04B",
     },
     secondaryTransparent: {
       main: "#66FFE082",
