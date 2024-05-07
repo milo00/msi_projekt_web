@@ -10,7 +10,7 @@ export const DashboardFlipCard = ({ title, description, action }) => {
     return (
         <Card className="flip-card"
             sx={{
-                borderRadius: "10px",
+                borderRadius: "0",
                 height: "500px",
                 perspective: "1000px",
                 backgroundColor: "transparent"

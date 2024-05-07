@@ -1,10 +1,18 @@
 .content-title {
-    color: white;
-    font-size: 36px;
-    font-weight: bold;
-    display: none;
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+  display: none;
 }
 
 .content-box:hover .content-title {
-    display: block;
+  display: block;
+}
+
+.content-box {
+  transition: opacity 0.2s ease-out;
+}
+
+.content-box:hover {
+  opacity: 0.7;
 }

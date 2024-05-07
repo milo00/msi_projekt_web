@@ -71,7 +71,7 @@ export const AttractionCandidateCard = ({ attractionData, openSelectAttractionDi
                                     }}
                                 >
                                     <CardMedia
-                                        sx={{ borderRadius: "10px" }}
+                                        sx={{ borderRadius: "0" }}
                                         component="img"
                                         image={attractionData.photoLink !== null ? getPhotoUrl(attractionData.photoLink) : PLACEHOLDER_IMAGE}
                                     />
