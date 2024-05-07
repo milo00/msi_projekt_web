@@ -11,7 +11,7 @@ export const DashboardOptionCard = ({ icon, title, description, route, groupId }
             <Card
                 sx={{
                     boxShadow: 2,
-                    borderRadius: "10px",
+                    borderRadius: "0",
                     transition: "transform 0.15s ease-in-out",
                     minHeight: "238px",
                     display: "flex",

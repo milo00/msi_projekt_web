@@ -4,6 +4,29 @@ const MyTheme = createTheme({
   typography: {
     fontFamily: ["ABeeZee", "sans-serif"].join(","),
   },
+  components: {
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          borderRadius: "0 !important",
+        },
+      },
+    },
+    MuiButtonBase: {
+      styleOverrides: {
+        root: {
+          borderRadius: "0 !important",
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderRadius: "0 !important",
+        },
+      },
+    },
+  },
   // components: {
   // MuiIcon: {
   //     defaultProps: {

@@ -14,23 +14,29 @@ header {
 }
 
 .nav-bar {
+  background-color: white;
+}
+
+.nav-bar-animated {
   transition: background-color 0.5s ease-out;
   background-color: transparent;
 }
 
-.nav-bar .MuiSvgIcon-root,
-.nav-bar .logo {
+.nav-bar-animated .MuiSvgIcon-root,
+.nav-bar-animated .logo {
   transition: color 0.5s ease-out;
   color: white;
 }
 
-.nav-bar.colored {
+.nav-bar-animated.colored {
   background-color: white;
   opacity: 90%;
 }
 
-.nav-bar.colored .MuiSvgIcon-root,
-.nav-bar.colored .logo {
+.nav-bar-animated.colored .MuiSvgIcon-root,
+.nav-bar-animated.colored .logo,
+.nav-bar .MuiSvgIcon-root,
+.nav-bar .logo {
   color: #34adfe;
 }
 
@@ -72,7 +78,7 @@ header {
   text-decoration: none;
 }
 
-.menu-items button {
+/* .menu-items button {
   display: flex;
   align-items: center;
   color: inherit;
@@ -93,9 +99,9 @@ header {
   color: inherit;
   text-decoration: none;
   padding: 0px 0px;
-}
+} */
 
-button span {
+/* button span {
   margin-left: 3px;
 }
 
@@ -113,16 +119,16 @@ button span {
 .menu-items button:hover {
   background-color: #55ccd9;
   border: transparent;
-}
+} */
 
-.menu-items a:hover {
+/* .menu-items a:hover {
   color: #55ccd9;
   background-color: #f2f2f2;
 }
 
 .menu-items .nav-link:hover {
   background-color: transparent;
-}
+} */
 
 .arrow::after {
   content: "";

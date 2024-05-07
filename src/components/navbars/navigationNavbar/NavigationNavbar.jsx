@@ -36,7 +36,7 @@ import { doGet } from "../../utils/fetch-utils";
 import { ReactComponent as LogoSvg } from "../../images/logo.svg";
 import "./NavigationNavbar.css";
 
-export const NavigationNavbar = ({ buttonsData, groupId }) => {
+export const NavigationNavbar = ({ buttonsData, groupId, animated }) => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [anchorElGroup, setAnchorElGroup] = React.useState(null);
   const [leaveGroupDialogOpen, setLeaveGroupDialogOpen] = useState(false);
@@ -64,6 +64,7 @@ export const NavigationNavbar = ({ buttonsData, groupId }) => {
           my: 2,
           height: 32,
           padding: 0,
+          borderRadius: 0,
         }}
       >
         <LogoSvg style={{ height: "100%", width: "100%" }} />
@@ -238,7 +239,9 @@ export const NavigationNavbar = ({ buttonsData, groupId }) => {
       )}
       <Box sx={{ flexGrow: 1 }}>
         <AppBar
-          className={`nav-bar ${isScrolled ? "colored" : ""}`}
+          className={`${animated ? "nav-bar-animated" : "nav-bar"} ${
+            isScrolled ? "colored" : ""
+          }`}
           component="nav"
           sx={{ boxShadow: "none" }}
         >
@@ -289,12 +292,12 @@ export const NavigationNavbar = ({ buttonsData, groupId }) => {
             <Box
               sx={{
                 display: "flex",
+                gap: 2,
                 flexDirection: "row",
-                display: { xs: "none", sm: "block" },
               }}
             >
               {buttonsData.length !== 0 && (
-                <Box sx={{ flexGrow: 0, mr: 2 }}>
+                <>
                   <Tooltip title="Open trip group menu">
                     <IconButton
                       onClick={handleOpenGroupMenu}
@@ -380,7 +383,7 @@ export const NavigationNavbar = ({ buttonsData, groupId }) => {
                           </MenuItem>,
                         ]}
                   </Menu>
-                </Box>
+                </>
               )}
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open user menu">

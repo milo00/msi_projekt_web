@@ -66,7 +66,7 @@ export const AttractionCard = ({ attractionData, groupId, id, onDeletion }) => {
 
     useEffect(() => {
         getLocation();
-        Object.keys(currentLocation).length > 0 && calculateRoute();
+        Object.keys(currentLocation)?.length > 0 && calculateRoute();
     }, [expanded]);
 
     const getLocation = () => {
@@ -175,7 +175,7 @@ export const AttractionCard = ({ attractionData, groupId, id, onDeletion }) => {
                                 }}
                             >
                                 <CardMedia
-                                    sx={{ borderRadius: "15px" }}
+                                    sx={{ borderRadius: "0" }}
                                     component="img"
                                     image={attractionData.photoLink !== null ? getPhotoUrl(attractionData.photoLink) : PLACEHOLDER_IMAGE}
                                 />
@@ -350,12 +350,12 @@ export const AttractionCard = ({ attractionData, groupId, id, onDeletion }) => {
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
                         <Typography paragraph>
-                            {attractionData.description.length === 0 ?
+                            {attractionData.description?.length === 0 ?
                                 "No description provided" :
                                 attractionData.description
                             }
                         </Typography>
-                        {Object.keys(currentLocation).length > 0 ?
+                        {Object.keys(currentLocation)?.length > 0 ?
                             <Grid container sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                                 <Grid item xs={7} sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "400px", minWidth: "400px" }}>
                                     <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "start" }}>
