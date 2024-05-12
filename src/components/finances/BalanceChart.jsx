@@ -70,7 +70,7 @@ export const BalanceChart = ({ balancesData }) => {
         scales: {
             x: {
                 ticks: {
-                    color: '#24939e',
+                    color: '#34ADFE',
                     beginAtZero: true
                 },
                 grid: {
@@ -79,7 +79,7 @@ export const BalanceChart = ({ balancesData }) => {
             },
             y: {
                 ticks: {
-                    color: '#24939e',
+                    color: '#34ADFE',
                     beginAtZero: true
                 },
                 grid: {
@@ -105,7 +105,7 @@ export const BalanceChart = ({ balancesData }) => {
                     size: 24,
                     family: 'Calibri'
                 },
-                color: "#24939e"
+                color: "#34ADFE"
             },
         }
 

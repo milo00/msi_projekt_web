@@ -408,6 +408,7 @@ export const FinancesPage = () => {
                     </Box>
                     <Button
                       variant="contained"
+                      sx={{ color: "white !important" }}
                       onClick={() => setAddExpenditureDialogOpen(true)}
                     >
                       <AddIcon />
@@ -602,16 +603,19 @@ export const FinancesPage = () => {
               <Grid item xs={12}>
                 <Card
                   sx={{
+                    height: "100%",
                     overflow: "visible",
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "center",
+                    justifyContent: "flex-start",
                     position: "relative",
                     overflowWrap: "break-word",
                     backgroundClip: "border-box",
-                    minHeight: "500px",
-                    maxHeight: "1000px",
-                    minWidth: "1000px",
+                    minHeight: "600px",
+                    maxHeight: "600px",
+                    minWidth: "400px",
+                    // minWidth: "600px",
+                    // maxWidth: "650px",
                     borderRadius: "10px",
                   }}
                   elevation={5}
@@ -619,16 +623,12 @@ export const FinancesPage = () => {
                   <Box
                     sx={{
                       mx: 2,
-                      mt: -3,
                       py: 2,
                       px: 2,
-                      backgroundColor: "secondary.main",
-                      color: "#FFFFFF",
-                      borderRadius: "0.5rem",
-                      boxShadow:
-                        "rgb(0 0 0 / 14%) 0rem 0.25rem 1.25rem 0rem, rgb(0 187 212 / 40%) 0rem 0.4375rem 0.625rem -0.3125",
                       display: "flex",
                       flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignItems: "center",
                     }}
                   >
                     <Box
@@ -650,13 +650,14 @@ export const FinancesPage = () => {
                       </Typography>
                     </Box>
                   </Box>
+                  <Divider />
                   <Box
                     sx={{
                       display: "flex",
                       alignItems: "flex-start",
                       flexDirection: "row",
                       justifyContent: "space-between",
-                      minHeight: "450px",
+                      minHeight: "100%",
                       maxHeight: "950px",
                       width: "100%",
                     }}
@@ -680,9 +681,7 @@ export const FinancesPage = () => {
                           my: 2,
                         }}
                       >
-                        <Typography
-                          sx={{ color: "primary.main", fontSize: "32px" }}
-                        >
+                        <Typography sx={{ fontSize: "32px" }}>
                           My settlements
                         </Typography>
                       </Box>
@@ -703,7 +702,6 @@ export const FinancesPage = () => {
                         {mySettlements.length === 0 ? (
                           <Typography
                             sx={{
-                              color: "primary.dark",
                               fontSize: "24px",
                               mt: -10,
                             }}
@@ -733,7 +731,6 @@ export const FinancesPage = () => {
                     <Divider
                       orientation="vertical"
                       flexItem
-                      sx={{ borderRightWidth: 4, borderColor: "primary.dark" }}
                     />
                     <Box
                       sx={{
@@ -752,9 +749,7 @@ export const FinancesPage = () => {
                           my: 2,
                         }}
                       >
-                        <Typography
-                          sx={{ color: "primary.main", fontSize: "32px" }}
-                        >
+                        <Typography sx={{ fontSize: "32px" }}>
                           Other settlements
                         </Typography>
                       </Box>
@@ -775,7 +770,6 @@ export const FinancesPage = () => {
                         {otherSettlements.length === 0 ? (
                           <Typography
                             sx={{
-                              color: "primary.dark",
                               fontSize: "24px",
                               mt: -10,
                             }}

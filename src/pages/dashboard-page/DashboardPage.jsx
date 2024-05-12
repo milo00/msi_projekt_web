@@ -66,7 +66,7 @@ export const DashboardPage = () => {
         onSuccess={() => getTrips()}
       />
       {/* <SimpleNavbar /> */}
-      <NavigationNavbar buttonsData={[]} />
+      <NavigationNavbar buttonsData={[]} animated />
       <Box
         className="background-fade-in"
         sx={{
@@ -76,7 +76,7 @@ export const DashboardPage = () => {
           display: "grid",
           mt: -5,
           placeItems: "center",
-          minHeight: "75vh",
+          height: "90vh",
           width: "100%",
         }}
       >

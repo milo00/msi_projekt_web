@@ -182,14 +182,14 @@ export const DayPlanCard = ({ dayPlanData, groupId, showDetailedPlan, onSuccess,
                     <Box sx={{ display: "flex", flexDirection: "row" }}>
                         <Typography
                             sx={{
-                                color: "secondary.main",
+                                color: "primary.main",
                                 fontSize: "20px",
                                 padding: 0
                             }}
                         >
                             {dayPlanData.dayAttractions.length}
                         </Typography>
-                        <LocationOnIcon sx={{ color: "secondary.main", fontSize: "28px" }} />
+                        <LocationOnIcon sx={{ color: "primary.main", fontSize: "28px" }} />
                     </Box>
                 </ButtonBase>
                 <Box sx={{
@@ -204,7 +204,7 @@ export const DayPlanCard = ({ dayPlanData, groupId, showDetailedPlan, onSuccess,
                             aria-haspopup="true"
                             onClick={handleClick}
                             sx={{
-                                color: "secondary.main",
+                                color: "primary.main",
                                 padding: 0
                             }}
                         >

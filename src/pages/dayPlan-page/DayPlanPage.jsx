@@ -500,9 +500,10 @@ export const DayPlanPage = (props) => {
 
                     {isCoordinator && (
                       <Button
-                        variant="outlined"
+                        variant="contained"
                         sx={{
                           borderRadius: "0",
+                          color: "white !important",
                         }}
                         onClick={() => setCreateDayPlanDialogOpen(true)}
                       >
@@ -636,7 +637,7 @@ export const DayPlanPage = (props) => {
                           value="Optimize day plan"
                           control={
                             <Switch
-                              color="secondary"
+                              color="primary"
                               onChange={optimizeDayPlan}
                               checked={isOptimizedDayPlan}
                             />
@@ -663,15 +664,15 @@ export const DayPlanPage = (props) => {
                             <span>
                               <Button
                                 variant="contained"
+                                color="primary"
                                 disabled={
                                   Object.keys(currentLocation).length === 0
                                 }
                                 sx={{
-                                  backgroundColor: "secondary.main",
-                                  borderRadius: "0",
-                                  "&:hover": {
-                                    backgroundColor: "secondary.dark",
-                                  },
+                                  color:
+                                    Object.keys(currentLocation).length === 0
+                                      ? ""
+                                      : "white !important",
                                   mr: 2,
                                   minWidth: 10,
                                 }}
@@ -686,12 +687,11 @@ export const DayPlanPage = (props) => {
                           </Tooltip>
                           <Button
                             variant="contained"
-                            sx={{
-                              backgroundColor: "secondary.main",
-                              borderRadius: "0",
-                              "&:hover": { backgroundColor: "secondary.dark" },
-                            }}
+                            color="primary"
                             onClick={() => setSearchAttractionDialogOpen(true)}
+                            sx={{
+                              color: "white !important",
+                            }}
                           >
                             <AddIcon />
                             Add
@@ -733,9 +733,7 @@ export const DayPlanPage = (props) => {
                           ml: 2,
                         }}
                       >
-                        <Typography variant="h5">
-                          {dayPlanName}
-                        </Typography>
+                        <Typography variant="h5">{dayPlanName}</Typography>
                         <Typography variant="h7" color="text.secondary">
                           {dayPlanDate}
                         </Typography>

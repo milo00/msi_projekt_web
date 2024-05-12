@@ -12,7 +12,7 @@ export const LISBONURL = 'https://asset.kompas.com/crops/g1iKkE-gkNJ-bovt5pk6nxp
 export const PARTICLES_MAP = 'https://upload.wikimedia.org/wikipedia/commons/3/32/World_Map_of_Speed_Limit_Units_on_Traffic_Signs.svg';
 
 export const BACKGROUND_ROAD = 'https://lp-cms-production.imgix.net/2020-11/500pxRF_29805039.jpg?auto=format&q=40&ar=16%3A9&fit=crop';
-export const BACKGROUND_DASHBOARD = '"https://photographylife.com/wp-content/uploads/2016/06/Mass.jpg"';
+export const BACKGROUND_DASHBOARD = '"https://i.postimg.cc/Fzr4jhJT/pexels-vlada-karpovich-7368311.jpg"';
 export const BACKGROUND_STARTER = 'https://fly.pl/cdn/photo/assets/uploads/full/2018/04/Malediwy-pla%C5%BCa-w-luksusowym-resorcie.jpg';
 export const LUFTHANSA_LOGO = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Lufthansa_Logo_%28Crane%29.svg/1200px-Lufthansa_Logo_%28Crane%29.svg.png';
 

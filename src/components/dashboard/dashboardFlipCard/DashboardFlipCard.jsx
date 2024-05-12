@@ -19,7 +19,7 @@ export const DashboardFlipCard = ({ title, description, action }) => {
             <Box className="flip-card-inner">
                 <Box className="flip-card-front"
                     sx={{
-                        backgroundImage: "linear-gradient(to bottom right, #55ccd9, #24939e)"
+                        backgroundImage: "linear-gradient(to bottom right, #8dd0fc, #0785d9)"
                     }}
                 >
                     <Box py={12} px={3} textAlign="center" lineHeight={1}>
@@ -34,7 +34,7 @@ export const DashboardFlipCard = ({ title, description, action }) => {
                 </Box>
                 <Box className="flip-card-back"
                     sx={{
-                        backgroundImage: "linear-gradient(to bottom right, #55ccd9, #24939e)"
+                        backgroundImage: "linear-gradient(to bottom right, #8dd0fc, #0785d9)"
                     }}>
                     <Box pt={12} pb={2} px={2} textAlign="center" lineHeight={1}>
                         <Typography variant="h3" color="#FFFFFF" gutterBottom>
@@ -42,7 +42,7 @@ export const DashboardFlipCard = ({ title, description, action }) => {
                         </Typography>
                         <Typography
                             sx={{
-                                color: "secondary.main",
+                                color: "white",
                                 fontSize: "16px"
                             }}
                         >
